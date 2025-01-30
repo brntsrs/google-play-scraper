@@ -117,8 +117,16 @@ class AppInfoScraper implements ParseHandlerInterface
 
         $reviews = $this->extractReviews(new AppId($id, $locale, $country), $scriptData);
 
+        $age = 0;
+        preg_match('/application\/ld\+json([^>]+)>([^<]+)/', $response->getBody()->getContents(), $matches);
+        if (isset($matches[2])) {
+            $data = json_decode($matches[2], true);
+            $age = str_replace(['Rated for ', '+'], '', $data['contentRating'] ?? null);
+        }
+
         return AppInfo::newBuilder()
             ->setId($id)
+            ->setAge($age)
             ->setLocale($locale)
             ->setCountry($country)
             ->setName($name)

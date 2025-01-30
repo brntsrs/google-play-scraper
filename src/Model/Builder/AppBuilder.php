@@ -134,6 +134,8 @@ class AppBuilder
     /** @var Review[] */
     private $reviews = [];
 
+    private $age = 0;
+
     /**
      * @return string|null
      */
@@ -310,6 +312,26 @@ class AppBuilder
     public function setScore(float $score): self
     {
         $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAge(): int
+    {
+        return $this->age;
+    }
+
+    /**
+     * @param int $age
+     *
+     * @return AppBuilder
+     */
+    public function setAge(int $age): self
+    {
+        $this->age = $age;
 
         return $this;
     }
