@@ -232,11 +232,11 @@ class AppInfoScraper implements ParseHandlerInterface
     private function extractHistogramRating(array $data): HistogramRating
     {
         return new HistogramRating(
-            $data[1][1] ?? 0,
-            $data[2][1] ?? 0,
-            $data[3][1] ?? 0,
+            $data[5][1] ?? 0,
             $data[4][1] ?? 0,
-            $data[5][1] ?? 0
+            $data[3][1] ?? 0,
+            $data[2][1] ?? 0,
+            $data[1][1] ?? 0
         );
     }
 
