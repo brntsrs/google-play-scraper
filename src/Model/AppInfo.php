@@ -105,6 +105,8 @@ final class AppInfo extends App
     /** @var \Nelexa\GPlay\Model\Developer|null Application developer */
     private $developer;
 
+    private $age;
+
     /**
      * Returns an object with detailed information about the application.
      *
@@ -147,6 +149,7 @@ final class AppInfo extends App
         $this->numberVoters = $builder->getNumberVoters();
         $this->numberReviews = $builder->getNumberReviews();
         $this->reviews = $builder->getReviews();
+        $this->age = $builder->getAge();
     }
 
     /**
@@ -517,6 +520,7 @@ final class AppInfo extends App
         $array['updated'] = $this->updated !== null ? $this->updated->format(\DateTime::RFC3339) : null;
         $array['updatedTimestamp'] = $this->updated !== null ? $this->updated->getTimestamp() : 0;
         $array['numberReviews'] = $this->numberReviews;
+        $array['age'] = $this->age;
         $array['reviews'] = array_map(
             static function (Review $review) {
                 return $review->asArray();
