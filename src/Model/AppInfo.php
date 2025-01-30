@@ -356,6 +356,11 @@ final class AppInfo extends App
         return $this->appVersion;
     }
 
+    public function getAge(): ?int
+    {
+        return $this->age;
+    }
+
     /**
      * Returns the supported version of Android.
      *
