@@ -122,7 +122,7 @@ class AppInfoScraper implements ParseHandlerInterface
         preg_match('/application\/ld\+json([^>]+)>([^<]+)/', $content, $matches);
         if (isset($matches[2])) {
             $data = json_decode($matches[2], true);
-            $age = str_replace(['Rated for ', '+'], '', $data['contentRating'] ?? null);
+            $age = (int) str_replace(['Rated for ', '+'], '', $data['contentRating'] ?? 0);
         }
 
         return AppInfo::newBuilder()
