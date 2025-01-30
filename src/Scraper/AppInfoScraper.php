@@ -47,7 +47,8 @@ class AppInfoScraper implements ParseHandlerInterface
      */
     public function __invoke(RequestInterface $request, ResponseInterface $response, array &$options = []): AppInfo
     {
-        $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
+        $content = $response->getBody()->getContents();
+        $scriptData = ScraperUtil::extractScriptData($content);
 
         $appInfo = null;
         $editorsChoice = false;
@@ -118,7 +119,7 @@ class AppInfoScraper implements ParseHandlerInterface
         $reviews = $this->extractReviews(new AppId($id, $locale, $country), $scriptData);
 
         $age = 0;
-        preg_match('/application\/ld\+json([^>]+)>([^<]+)/', $response->getBody()->getContents(), $matches);
+        preg_match('/application\/ld\+json([^>]+)>([^<]+)/', $content, $matches);
         if (isset($matches[2])) {
             $data = json_decode($matches[2], true);
             $age = str_replace(['Rated for ', '+'], '', $data['contentRating'] ?? null);
